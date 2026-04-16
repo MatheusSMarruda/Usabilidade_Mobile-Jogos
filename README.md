@@ -1,0 +1,1 @@
+ Para rodar: npm run dev dentro da pasta memory-game-ods15.
