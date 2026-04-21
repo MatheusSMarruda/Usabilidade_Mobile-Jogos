@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './App.css';
-import GameMenu from './components/GameMenu';
+import HomeScreen from './components/HomeScreen';
 import GameBoard from './components/GameBoard';
 
 /**
@@ -44,7 +44,7 @@ const App = () => {
   return (
     <div className="app-root">
       {phase === 'menu' && (
-        <GameMenu onStart={handleStart} highScores={highScores} />
+        <HomeScreen onStart={handleStart} highScores={highScores} />
       )}
       {phase === 'playing' && (
         <GameBoard

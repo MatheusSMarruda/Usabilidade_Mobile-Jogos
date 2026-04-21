@@ -1,7 +1,9 @@
 // ODS 15 - Vida Terrestre: animais e plantas em risco/relevantes para a biodiversidade
+// pixelId: referência ao sprite chibi em CardSprites.jsx
 export const animals = [
   {
     id: 1,
+    pixelId: 'urso',
     emoji: '🐺',
     name: 'Lobo-guará',
     wikiSlug: 'Maned_wolf',
@@ -10,6 +12,7 @@ export const animals = [
   },
   {
     id: 2,
+    pixelId: 'coelho',
     emoji: '🐆',
     name: 'Onça-pintada',
     wikiSlug: 'Jaguar',
@@ -18,6 +21,7 @@ export const animals = [
   },
   {
     id: 3,
+    pixelId: 'coala',
     emoji: '🐘',
     name: 'Elefante Africano',
     wikiSlug: 'African_elephant',
@@ -26,6 +30,7 @@ export const animals = [
   },
   {
     id: 4,
+    pixelId: 'gato',
     emoji: '🦍',
     name: 'Gorila',
     wikiSlug: 'Gorilla',
@@ -34,6 +39,7 @@ export const animals = [
   },
   {
     id: 5,
+    pixelId: 'guaxinim',
     emoji: '🐼',
     name: 'Panda-gigante',
     wikiSlug: 'Giant_panda',
@@ -42,6 +48,7 @@ export const animals = [
   },
   {
     id: 6,
+    pixelId: 'cachorro',
     emoji: '🐯',
     name: 'Tigre-de-bengala',
     wikiSlug: 'Bengal_tiger',
@@ -50,6 +57,7 @@ export const animals = [
   },
   {
     id: 7,
+    pixelId: 'raposa',
     emoji: '🦅',
     name: 'Harpia',
     wikiSlug: 'Harpy_eagle',
@@ -58,6 +66,7 @@ export const animals = [
   },
   {
     id: 8,
+    pixelId: 'esquilo',
     emoji: '🦓',
     name: 'Zebra-das-planícies',
     wikiSlug: 'Plains_zebra',
@@ -66,6 +75,7 @@ export const animals = [
   },
   {
     id: 9,
+    pixelId: 'vaca',
     emoji: '🦏',
     name: 'Rinoceronte-branco',
     wikiSlug: 'White_rhinoceros',
@@ -74,6 +84,7 @@ export const animals = [
   },
   {
     id: 10,
+    pixelId: 'porco',
     emoji: '🐻',
     name: 'Urso-pardo',
     wikiSlug: 'Brown_bear',
