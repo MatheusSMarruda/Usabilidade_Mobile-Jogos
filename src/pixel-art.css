@@ -1,0 +1,288 @@
+/* =========================================================
+   PIXEL ART SYSTEM — Vida Terrestre (Amazônia)
+   Adaptado do amazonia-standalone para o projeto Vite/React.
+   Todos os estilos de body/html são SCOPED em .pixel-home
+   para não interferir com o GameBoard/Bootstrap.
+   ========================================================= */
+
+:root {
+  --ink:        #2a1a0e;
+  --ink-soft:   #4a2f1a;
+  --cream:      #f5e6c8;
+  --cream-2:    #e8d4a8;
+  --parchment:  #d4b487;
+  --brown-1:    #8b4513;
+  --brown-2:    #6b3410;
+  --brown-3:    #4a2208;
+  --orange-1:   #ea580c;
+  --orange-2:   #d97706;
+  --amber:      #fbbf24;
+  --gold:       #e8a838;
+  --olive-1:    #84a05c;
+  --olive-2:    #5c7040;
+  --olive-3:    #3d4a28;
+  --rust:       #b8431f;
+  --red-leaf:   #a0321e;
+  --sky-1:      #f4c470;
+  --sky-2:      #e88844;
+  --sky-3:      #b85c28;
+
+  --px: 4px;
+}
+
+/* Pixel rendering e fonte APENAS dentro da tela inicial */
+.pixel-home * {
+  image-rendering: pixelated;
+  image-rendering: -moz-crisp-edges;
+  image-rendering: crisp-edges;
+}
+
+.pixel-home {
+  font-family: 'VT323', 'Courier New', monospace;
+  color: var(--ink);
+  background: #1f3520;
+  min-height: 100vh;
+  overflow-x: hidden;
+  position: relative;
+}
+
+/* =========================================================
+   TYPE
+   ========================================================= */
+.pixel-home .pa-title {
+  font-family: 'Press Start 2P', monospace;
+  letter-spacing: 0.02em;
+  line-height: 1.3;
+  text-rendering: geometricPrecision;
+}
+.pixel-home .pa-body { font-family: 'VT323', monospace; font-size: 20px; line-height: 1.2; }
+
+/* =========================================================
+   RPG WINDOW
+   ========================================================= */
+.pixel-home .rpg-window {
+  position: relative;
+  background: var(--cream);
+  padding: 20px 22px;
+  border: 4px solid var(--ink);
+  box-shadow:
+    0 0 0 4px var(--brown-1),
+    inset 0 0 0 3px var(--cream-2),
+    inset 0 0 0 6px var(--parchment),
+    0 8px 0 var(--brown-3),
+    0 12px 0 rgba(0,0,0,0.25);
+}
+.pixel-home .rpg-window::before,
+.pixel-home .rpg-window::after {
+  content: '';
+  position: absolute;
+  width: 12px; height: 12px;
+  background: var(--ink);
+  z-index: 2;
+}
+.pixel-home .rpg-window::before { top: -4px; left: -4px; box-shadow: 16px 0 0 var(--ink), 0 16px 0 var(--ink); }
+.pixel-home .rpg-window::after  { bottom: -4px; right: -4px; box-shadow: -16px 0 0 var(--ink), 0 -16px 0 var(--ink); }
+
+.pixel-home .rpg-window.parchment {
+  background: var(--parchment);
+  box-shadow:
+    0 0 0 4px var(--brown-2),
+    inset 0 0 0 3px #c9a373,
+    inset 0 0 0 6px #a88558,
+    0 8px 0 var(--brown-3),
+    0 12px 0 rgba(0,0,0,0.25);
+}
+
+/* =========================================================
+   RPG BUTTON
+   ========================================================= */
+.pixel-home .rpg-btn {
+  font-family: 'Press Start 2P', monospace;
+  font-size: 14px;
+  color: var(--cream);
+  background: var(--olive-2);
+  border: 4px solid var(--ink);
+  padding: 14px 24px;
+  cursor: pointer;
+  box-shadow:
+    inset 0 0 0 3px var(--olive-1),
+    0 6px 0 var(--olive-3),
+    0 8px 0 var(--ink);
+  transition: transform 0.08s, box-shadow 0.08s;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+}
+.pixel-home .rpg-btn:hover {
+  transform: translateY(2px);
+  box-shadow:
+    inset 0 0 0 3px var(--olive-1),
+    0 4px 0 var(--olive-3),
+    0 6px 0 var(--ink);
+}
+.pixel-home .rpg-btn:active {
+  transform: translateY(6px);
+  box-shadow:
+    inset 0 0 0 3px var(--olive-1),
+    0 0 0 var(--olive-3),
+    0 2px 0 var(--ink);
+}
+.pixel-home .rpg-btn.orange {
+  background: var(--orange-2);
+  box-shadow:
+    inset 0 0 0 3px var(--amber),
+    0 6px 0 var(--rust),
+    0 8px 0 var(--ink);
+}
+.pixel-home .rpg-btn.orange:hover {
+  box-shadow: inset 0 0 0 3px var(--amber), 0 4px 0 var(--rust), 0 6px 0 var(--ink);
+}
+
+/* =========================================================
+   DIFFICULTY CARD
+   ========================================================= */
+.pixel-home .diff-card {
+  position: relative;
+  width: 140px;
+  padding: 14px 10px 16px;
+  background: var(--cream);
+  border: 4px solid var(--ink);
+  box-shadow:
+    inset 0 0 0 3px var(--cream-2),
+    inset 0 0 0 6px var(--parchment),
+    6px 6px 0 var(--ink);
+  cursor: pointer;
+  text-align: center;
+  transition: transform 0.1s;
+}
+.pixel-home .diff-card:hover { transform: translate(-2px, -2px); box-shadow: inset 0 0 0 3px var(--cream-2), inset 0 0 0 6px var(--parchment), 8px 8px 0 var(--ink); }
+.pixel-home .diff-card.selected {
+  background: var(--amber);
+  box-shadow:
+    inset 0 0 0 3px #ffd87a,
+    inset 0 0 0 6px var(--gold),
+    6px 6px 0 var(--ink);
+}
+.pixel-home .diff-card .sprite-wrap {
+  height: 64px;
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+  margin-bottom: 8px;
+}
+.pixel-home .diff-card .label {
+  font-family: 'Press Start 2P', monospace;
+  font-size: 11px;
+  color: var(--ink);
+  margin-bottom: 4px;
+}
+.pixel-home .diff-card .size {
+  font-family: 'VT323', monospace;
+  font-size: 18px;
+  color: var(--brown-2);
+}
+
+/* =========================================================
+   SPRITE
+   ========================================================= */
+.pixel-home .sprite {
+  position: relative;
+}
+
+@keyframes bob { 0%,100% { transform: translateY(0); } 50% { transform: translateY(-3px); } }
+@keyframes sway-leaf { 0%,100% { transform: rotate(-2deg); } 50% { transform: rotate(2deg); } }
+@keyframes sway-grass { 0%,100% { transform: skewX(-3deg); } 50% { transform: skewX(3deg); } }
+@keyframes water-shimmer { 0%,100% { opacity: .9; } 50% { opacity: .6; } }
+@keyframes fire-anim { 0%,100% { transform: scaleY(1) scaleX(1); } 50% { transform: scaleY(1.1) scaleX(.95); } }
+
+.pixel-home .bob { animation: bob 1.2s ease-in-out infinite; }
+.pixel-home .sway-leaf { transform-origin: bottom center; animation: sway-leaf 3s ease-in-out infinite; }
+.pixel-home .sway-grass { transform-origin: bottom center; animation: sway-grass 2.4s ease-in-out infinite; }
+.pixel-home .shimmer { animation: water-shimmer 1.8s ease-in-out infinite; }
+
+/* =========================================================
+   SCENE
+   ========================================================= */
+.pixel-home .scene {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+}
+
+.pixel-home .sky-autumn { background: linear-gradient(180deg, var(--sky-1) 0%, var(--sky-2) 55%, var(--sky-3) 100%); }
+.pixel-home .sky-caatinga { background: linear-gradient(180deg, #f4e0a0 0%, #e89060 55%, #a04020 100%); }
+.pixel-home .sky-pantanal { background: linear-gradient(180deg, #f0b870 0%, #d87848 50%, #8a3818 100%); }
+
+/* =========================================================
+   HUD / top-left tag
+   ========================================================= */
+.pixel-home .hud-tag {
+  position: absolute;
+  top: 20px; left: 20px;
+  background: var(--ink);
+  color: var(--amber);
+  font-family: 'Press Start 2P', monospace;
+  font-size: 10px;
+  padding: 8px 12px;
+  border: 3px solid var(--ink);
+  box-shadow: inset 0 0 0 2px var(--gold), 4px 4px 0 var(--brown-3);
+  z-index: 20;
+}
+
+/* =========================================================
+   FRAME (tela completa)
+   ========================================================= */
+.pixel-home .frame {
+  position: relative;
+  width: 100%;
+  min-height: 100vh;
+  overflow: hidden;
+}
+
+/* =========================================================
+   RPG WINDOW — variante wood (usada no tabuleiro e menus)
+   ========================================================= */
+.pixel-home .rpg-window.wood {
+  background: linear-gradient(#a06a3e, #7a4a28);
+  box-shadow:
+    0 0 0 4px var(--brown-2),
+    inset 0 0 0 3px #b88856,
+    inset 0 0 0 6px #8b5a32,
+    0 8px 0 var(--brown-3),
+    0 12px 0 rgba(0,0,0,0.25);
+  color: var(--cream);
+}
+
+/* =========================================================
+   TABULEIRO — responsividade mínima para cartas
+   ========================================================= */
+@media (max-width: 680px) {
+  .pixel-home [role="grid"] {
+    grid-template-columns: repeat(4, 80px) !important;
+    gap: 8px !important;
+    padding: 16px 12px 32px !important;
+  }
+  .pixel-home [role="grid"] > div {
+    width: 80px !important;
+    height: 100px !important;
+  }
+}
+
+/* =========================================================
+   HIGH SCORES (mini panel)
+   ========================================================= */
+.pixel-home .hs-panel {
+  background: var(--ink);
+  border: 3px solid var(--brown-1);
+  box-shadow: inset 0 0 0 2px var(--brown-3), 4px 4px 0 rgba(0,0,0,0.4);
+  padding: 12px 18px;
+  min-width: 260px;
+}
+.pixel-home .hs-row {
+  display: flex;
+  justify-content: space-between;
+  gap: 16px;
+  padding: 4px 0;
+  border-bottom: 1px solid var(--brown-2);
+  font-size: 16px;
+}
+.pixel-home .hs-row:last-child { border-bottom: none; }
