@@ -1,163 +1,160 @@
-# Script de Apresentação Pitch - Jogo da Memória ODS 15
+# 🌳 Jogo da Memória ODS 15 — Vida Terrestre
 
-Tempo sugerido: 10 a 12 minutos  
-Formato: pitch com demonstração do projeto  
-Projeto: Jogo da Memória - ODS 15: Vida Terrestre  
-Comando para rodar: `npm run dev`
+<div align="center">
 
-## 1. Abertura e Problema - Apresentador(a) 1
+[![React](https://img.shields.io/badge/React-19-61DAFB?logo=react&logoColor=black)](https://react.dev/)
+[![Vite](https://img.shields.io/badge/Vite-8-646CFF?logo=vite&logoColor=white)](https://vite.dev/)
+[![Bootstrap](https://img.shields.io/badge/Bootstrap-5.3-7952B3?logo=bootstrap&logoColor=white)](https://getbootstrap.com/)
+[![Axios](https://img.shields.io/badge/Axios-1.15-5A29E4?logo=axios&logoColor=white)](https://axios-http.com/)
 
-Boa [noite/tarde], professor(a) e colegas.
+</div>
 
-Hoje nós vamos apresentar o nosso projeto de Desenvolvimento Web Mobile: um jogo da memória interativo inspirado no ODS 15, Vida Terrestre.
+## 📌 Sobre o Projeto
 
-O ponto de partida do nosso projeto foi uma pergunta simples: como transformar um tema importante, como preservação da biodiversidade e proteção dos ecossistemas terrestres, em uma experiência digital leve, acessível e envolvente?
+Este projeto é um **jogo da memória educativo** com visual **pixel-art estilo RPG**, desenvolvido em **React** como trabalho acadêmico da disciplina de Desenvolvimento Web/Mobile (UC HUB), com foco em **usabilidade mobile** e nas **Heurísticas de Nielsen**.
 
-O ODS 15 fala sobre proteger, recuperar e promover o uso sustentável dos ecossistemas terrestres, combater a desertificação, deter a degradação da terra e frear a perda de biodiversidade.
+O tema do jogo é a **ODS 15 (Objetivo de Desenvolvimento Sustentável — Vida Terrestre)** da ONU: todas as cartas representam **animais ameaçados de extinção ou relevantes para a biodiversidade**, como o Lobo-guará, a Onça-pintada, a Harpia e o Panda-gigante. Cada animal carrega informações reais de:
 
-Mas, muitas vezes, esse tema chega até as pessoas de forma muito teórica. Então, nossa proposta foi criar uma experiência interativa que aproximasse o usuário desse assunto por meio de algo familiar: um jogo da memória.
+* **Status de conservação** (Vulnerável, Em Perigo, Quase Ameaçado...)
+* **Bioma de origem** (Cerrado, Amazônia, Savana...)
+* **Curiosidades reais** buscadas dinamicamente na **API da Wikipedia** ao final de cada partida
 
-Em vez de apenas apresentar informações em texto, o usuário joga, escolhe uma dificuldade, encontra pares de animais, acompanha sua pontuação e recebe curiosidades relacionadas às espécies e à vida terrestre.
+Assim, além de exercitar a memória, o jogador aprende sobre conservação ambiental enquanto joga. 🐆
 
-## 2. Solução Proposta - Apresentador(a) 2
+## 🎮 Como o Jogo Funciona
 
-A solução que desenvolvemos é um jogo web feito com React, Bootstrap, CSS e NodeJS, executado localmente com o comando `npm run dev`.
+O fluxo do jogo é dividido em três momentos:
 
-O jogo começa com uma tela inicial em estilo pixel art, inspirada em uma ambientação natural, com referência direta ao tema Vida Terrestre.
+1. **Menu Inicial (`HomeScreen`)**: O jogador escolhe um "animal guia" que define a dificuldade da partida:
+   * 🐜 **Fácil** — tabuleiro 4×3 (6 pares), penalidade de erro: -5 pontos
+   * 🦌 **Médio** — tabuleiro 4×4 (8 pares), penalidade de erro: -7 pontos
+   * 🐆 **Difícil** — tabuleiro 5×4 (10 pares), penalidade de erro: -10 pontos
+2. **Partida (`GameBoard`)**: As cartas são embaralhadas (algoritmo **Fisher-Yates**) e o jogador vira duas por vez buscando os pares. Um HUD em tempo real exibe **progresso, pontos, combo, tempo e movimentos**.
+3. **Fim de Jogo (`WinModal`)**: Ao encontrar todos os pares (vitória) ou zerar a pontuação (derrota), um modal exibe o desempenho com **classificação por estrelas (1 a 3 ⭐)** e uma **curiosidade real** sobre um dos animais encontrados, consumida da API REST da Wikipedia via **Axios**.
 
-Nessa tela, o usuário escolhe uma dificuldade:
+### 🏆 Sistema de Pontuação
 
-- Fácil, com 6 pares.
-- Médio, com 8 pares.
-- Difícil, com 10 pares.
+| Regra | Valor |
+| --- | --- |
+| Pontuação inicial | 100 pontos |
+| Acerto rápido (menos de 3 tentativas desde o último par) | +25 pontos |
+| Combo (acertos consecutivos) | +10 pontos por nível de combo |
+| Erro | -5 a -10 pontos (conforme dificuldade) |
+| Pontuação chegou a 0 | **Game Over** 💀 |
 
-Essa escolha muda o tamanho do desafio e também altera a penalidade de pontuação quando o usuário erra um par.
+Os **recordes (Top 10)** ficam salvos no `localStorage` do navegador e são exibidos no menu inicial — nenhum cadastro ou servidor é necessário.
 
-A mecânica principal é simples: o usuário vira duas cartas, tenta encontrar pares iguais e precisa completar o tabuleiro mantendo a melhor pontuação possível.
+## 🧠 Usabilidade (Heurísticas de Nielsen)
 
-O diferencial é que o jogo não fica só na memorização. Ele usa animais relacionados à biodiversidade e traz informações sobre espécies, status de conservação e biomas. Assim, o jogo funciona como uma porta de entrada para a conscientização ambiental.
+O projeto foi desenhado aplicando explicitamente as heurísticas de usabilidade:
 
-## 3. Demonstração do Jogo - Apresentador(a) 3
+* **#1 Visibilidade do status do sistema**: timer, contador de movimentos, barra de progresso e pontuação sempre visíveis no HUD.
+* **#3 Controle e liberdade do usuário**: é possível reiniciar a partida ou voltar ao menu a qualquer momento.
+* **#5 Prevenção de erros**: diálogo de confirmação antes de reiniciar uma partida em andamento e bloqueio de cliques durante a animação de comparação.
+* **#6 Reconhecimento em vez de memorização**: pares encontrados permanecem visíveis e marcados com ✓.
+* **#8 Estética e design minimalista**: interface pixel-art limpa e focada no tabuleiro.
+* **#9 Recuperação de erros**: feedback construtivo no fim da partida, incentivando uma nova tentativa.
 
-Agora vamos demonstrar rapidamente o funcionamento.
+O jogo também possui suporte a **acessibilidade**: as cartas são navegáveis por teclado (`Tab` + `Enter`) e possuem rótulos `aria-label` para leitores de tela.
 
-Primeiro, rodamos o projeto com:
+## 🛠️ Tecnologias Utilizadas
+
+* **Linguagem/Biblioteca:** JavaScript (ES Modules) + React 19 (Hooks: `useState`, `useEffect`, `useCallback`, `useRef`)
+* **Build Tool:** Vite 8 (dev server com HMR e build de produção)
+* **Estilização:** CSS customizado (pixel-art) + Bootstrap 5
+* **Requisições HTTP:** Axios (consumo da API REST da Wikipedia)
+* **Qualidade de Código:** ESLint 9
+
+## 📂 Estrutura do Repositório
+
+```text
+├── public/                              # Arquivos estáticos (favicon, sprites SVG)
+├── src/
+│   ├── components/
+│   │   ├── HomeScreen.jsx               # Tela inicial: dificuldade, instruções e recordes
+│   │   ├── GameBoard.jsx                # Tabuleiro, HUD e toda a lógica da partida
+│   │   ├── WinModal.jsx                 # Modal de vitória/derrota + fato da Wikipedia
+│   │   ├── CardSprites.jsx              # Sprites pixel-art dos animais das cartas
+│   │   ├── Sprites.jsx                  # Sprites decorativos (formiga, onça, placa...)
+│   │   ├── Scenes.jsx                   # Cenário pixel-art da Amazônia (tela inicial)
+│   │   ├── Card.jsx                     # Componente de carta (versão Bootstrap)
+│   │   ├── GameMenu.jsx                 # Menu de dificuldade (versão Bootstrap)
+│   │   └── ScoreBoard.jsx               # Placar da partida (versão Bootstrap)
+│   ├── data/
+│   │   └── animals.js                   # Dados dos animais, dificuldades e pontuação
+│   ├── App.jsx                          # Componente raiz (controle de fases do jogo)
+│   ├── pixel-art.css                    # Tema visual pixel-art RPG
+│   └── main.jsx                         # Ponto de entrada do React
+├── index.html                           # HTML base servido pelo Vite
+├── package.json                         # Dependências e scripts do projeto
+├── vite.config.js                       # Configuração do Vite
+├── eslint.config.js                     # Regras de lint
+├── script_apresentacao_pitch_ods15.md   # Roteiro do pitch de apresentação
+└── README.md                            # Documentação do projeto
+```
+
+## 🚀 Como Executar o Projeto Localmente
+
+### Pré-requisitos
+
+Certifique-se de ter instalado em sua máquina:
+
+* [Node.js](https://nodejs.org/) (versão 18 ou superior)
+* npm (já incluso no Node.js)
+
+### Passo a Passo
+
+**1. Clone o repositório**
+
+```bash
+git clone https://github.com/MatheusSMarruda/Usabilidade_Mobile-Jogos.git
+cd Usabilidade_Mobile-Jogos
+```
+
+**2. Instale as dependências**
+
+```bash
+npm install
+```
+
+**3. Inicie o servidor de desenvolvimento**
 
 ```bash
 npm run dev
 ```
 
-Na tela inicial, temos o título "Jogo da Memória" e a identificação do tema: ODS 15 - Vida Terrestre.
+**4. Acesse o jogo**
 
-O usuário escolhe um animal guia, que também representa a dificuldade. Depois, ele clica em "Iniciar Jornada".
+Abra o navegador no endereço exibido no terminal (por padrão `http://localhost:5173`). Escolha a dificuldade e clique em **▶ INICIAR JORNADA**.
 
-Durante a partida, o sistema mostra informações importantes em tempo real:
+## 📦 Build de Produção
 
-- Progresso de pares encontrados.
-- Pontuação atual.
-- Tempo de jogo.
-- Quantidade de movimentos.
-- Nível escolhido.
-- Combo, quando o usuário acerta pares em sequência.
+Para gerar a versão otimizada do jogo (arquivos estáticos na pasta `dist/`):
 
-Se o usuário acerta rapidamente, ganha bônus. Se erra, perde pontos de acordo com a dificuldade. Isso cria um desafio maior do que apenas terminar o jogo: o objetivo é jogar bem, memorizar melhor e manter uma boa pontuação.
+```bash
+npm run build
+```
 
-Quando a partida termina, aparece um modal com o resultado final, incluindo pontuação, tempo, movimentos, dificuldade e uma mensagem de desempenho.
+Para pré-visualizar o build localmente:
 
-Também foi implementada uma requisição HTTP usando Axios para buscar uma curiosidade sobre um animal na API da Wikipedia. Caso a conexão falhe, o sistema usa dados locais, como o status da espécie e o bioma.
+```bash
+npm run preview
+```
 
-## 4. Usabilidade e Heurísticas de Nielsen - Apresentador(a) 4
+## 🧹 Outros Comandos Úteis
 
-Um dos principais requisitos do projeto era aplicar pelo menos cinco heurísticas de Nielsen. Nós aplicamos várias delas diretamente na experiência do jogo.
+| Comando | Descrição |
+| --- | --- |
+| `npm run dev` | Inicia o servidor de desenvolvimento com hot reload |
+| `npm run build` | Gera o build de produção em `dist/` |
+| `npm run preview` | Serve o build de produção localmente |
+| `npm run lint` | Executa o ESLint em todo o projeto |
 
-A primeira é a visibilidade do status do sistema. O usuário sempre sabe o que está acontecendo porque o jogo mostra pontuação, tempo, movimentos e progresso dos pares encontrados.
+---
 
-A segunda é controle e liberdade do usuário. Durante a partida, o jogador pode voltar ao menu ou reiniciar o jogo. E, se já tiver feito movimentos, aparece uma confirmação antes de perder o progresso.
+<div align="center">
 
-A terceira é prevenção de erros. O jogo bloqueia novas ações enquanto duas cartas estão sendo comparadas, evitando cliques acidentais ou estados confusos.
+Projeto acadêmico — Engenharia de Software · UC HUB · Desenvolvimento Web/Mobile
+🌱 *Jogue, memorize e aprenda sobre a vida terrestre!* 🌱
 
-A quarta é reconhecimento em vez de memorização. As cartas encontradas permanecem visíveis e marcadas, facilitando o entendimento do progresso.
-
-A quinta é estética e design minimalista. Mesmo usando uma identidade visual pixel art, a interface mantém foco no jogo: cartas, status e ações principais. Não há excesso de informações competindo com a tarefa do usuário.
-
-Além disso, o jogo também oferece feedback construtivo no final da partida, com mensagem de vitória ou derrota, estrelas e estatísticas.
-
-## 5. Desenvolvimento Técnico - Apresentador(a) 5
-
-Na parte técnica, o projeto foi desenvolvido com React e Vite.
-
-A aplicação foi organizada em componentes, como:
-
-- `HomeScreen`, responsável pela tela inicial.
-- `GameBoard`, responsável pela lógica principal do tabuleiro.
-- `WinModal`, responsável pelo resultado da partida.
-- Componentes de cartas, placar, sprites e cenas visuais.
-
-Usamos `useState` para controlar estados como fase do jogo, dificuldade, cartas viradas, pares encontrados, pontuação, tempo e recordes.
-
-Também usamos `useEffect` para carregar recordes do `localStorage`, controlar o cronômetro, verificar vitória ou derrota e buscar informações externas sobre os animais.
-
-As listas são usadas para renderizar cartas, recordes e informações repetitivas. As props conectam os componentes, por exemplo passando a dificuldade escolhida da tela inicial para o tabuleiro.
-
-O projeto também usa Bootstrap para apoiar elementos visuais e responsividade, Axios para a requisição HTTP e `localStorage` para salvar os melhores resultados.
-
-## 6. Impacto e Valor do Projeto - Apresentador(a) 1 ou 2
-
-O valor do nosso projeto está em unir entretenimento, usabilidade e educação ambiental.
-
-O usuário não recebe apenas uma mensagem dizendo que a biodiversidade é importante. Ele interage com esse tema. Ele joga com animais, percebe espécies e biomas, recebe curiosidades e associa o aprendizado a uma experiência prática.
-
-Esse tipo de solução pode ser usado em contextos educacionais, especialmente com crianças e jovens, como uma atividade introdutória sobre o ODS 15.
-
-Também é um projeto que pode evoluir. Futuramente, seria possível adicionar mais espécies brasileiras, separar cartas por bioma, criar fases temáticas, incluir sons, ranking online ou perguntas educativas após cada partida.
-
-## 7. Fechamento - Todos ou Último Apresentador
-
-Para concluir, nosso projeto atende à proposta da disciplina porque entrega uma aplicação web interativa, feita com React, organizada em componentes, com eventos, estados, listas, requisição HTTP, ambiente NodeJS e foco em usabilidade.
-
-Ao mesmo tempo, ele conversa diretamente com o ODS 15, Vida Terrestre, usando o jogo da memória como uma forma simples e acessível de chamar atenção para biodiversidade, conservação e preservação dos ecossistemas.
-
-Nosso objetivo foi mostrar que tecnologia e sustentabilidade podem caminhar juntas. Um jogo simples pode ser mais do que entretenimento: pode ser uma ferramenta de conscientização.
-
-Obrigado(a). Agora ficamos à disposição para perguntas.
-
-## Roteiro Rápido para Demonstração
-
-1. Abrir o terminal na pasta do projeto.
-2. Rodar `npm run dev`.
-3. Abrir o endereço exibido pelo Vite no navegador.
-4. Mostrar a tela inicial e o tema ODS 15.
-5. Escolher uma dificuldade.
-6. Iniciar a partida.
-7. Virar algumas cartas e mostrar:
-   - progresso;
-   - pontuação;
-   - tempo;
-   - movimentos;
-   - penalidade por erro;
-   - bônus por acerto e combo.
-8. Mostrar o botão de reiniciar e a confirmação.
-9. Finalizar ou explicar o modal final.
-10. Destacar a curiosidade buscada via Wikipedia ou os dados locais de fallback.
-
-## Divisão Sugerida para o Grupo
-
-Se o grupo tiver 4 pessoas:
-
-- Pessoa 1: abertura, problema e ODS 15.
-- Pessoa 2: solução e funcionalidades.
-- Pessoa 3: demonstração prática.
-- Pessoa 4: heurísticas, tecnologia e fechamento.
-
-Se o grupo tiver 5 pessoas:
-
-- Pessoa 1: abertura e problema.
-- Pessoa 2: solução.
-- Pessoa 3: demonstração.
-- Pessoa 4: heurísticas de Nielsen.
-- Pessoa 5: desenvolvimento técnico, impacto e fechamento.
-
-Se o grupo tiver 6 ou 7 pessoas:
-
-- Dividir a demonstração em duas partes: tela inicial/configurações e partida/resultado.
-- Dividir a parte técnica em componentes React e recursos como HTTP, localStorage e pontuação.
+</div>
